@@ -37,6 +37,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     shell.inline = <<-EOS
       set -e
       cd /vagrant/
+      # install/update all git-hooks
+      for hook in $(find git-hooks/ -type f | xargs basename)
+      do
+        rm -f .git/hooks/$hook;
+        cp git-hooks/$hook .git/hooks/$hook;
+      done
       [ ! -d log ] && mkdir log
       cd kikar_hamedina/
       [ ! -d logs ] && mkdir logs
