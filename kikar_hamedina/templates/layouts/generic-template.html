@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load i18n %}
 {% load core_extras %}
-
+{% load staticfiles %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
 <html>
@@ -23,14 +23,14 @@
   {% block social_share %}
   <!-- Open graph meta tags supported by facebook, whatsapp, linkedin and more -->
   <meta property="og:image"
-        content="http://kikar.org/static/media/kikar_hamedina_logo_900_472.png"/>
+        content="https://kikar.org/static/media/kikar_hamedina_logo_900_472.png"/>
   <meta property="fb:app_id" content="711830842197328"/>
   <meta property="og:title" content="{% trans 'Kikar Hamedina' %}">
   <meta property="og:description" content="{% blocktrans %}Today, around a 100 of the Knesset Members are
           using Facebook on a daily basis. We collect and organize what they write,
            and help you join the conversation. A project by the Public Knowledge
             Workshop.{% endblocktrans %}">
-  <meta property="og:url" content="http://kikar.org//">
+  <meta property="og:url" content="https://kikar.org//">
   <meta property="og:site_name" content="{% trans 'Kikar Hamedina' %}">
   {#
   <meta property="og:image:secure_url"
@@ -45,11 +45,10 @@
            and help you join the conversation. A project by the Public Knowledge
             Workshop.{% endblocktrans %}"/>
   <meta name="twitter:image"
-        content="http://kikar.org/static/media/kikar_hamedina_logo_506_256.png"/>
+        content="https://kikar.org/static/media/kikar_hamedina_logo_506_256.png"/>
 
   <!-- For some other bots-->
-  <link rel="image_src" href="{% static '" media
-  /kikar_hamedina_logo.png"' %}"/>
+  <link rel="image_src" href="{% static 'media/kikar_hamedina_logo.png' %}"/>
 
 
   {% endblock %}
@@ -58,7 +57,7 @@
   <link
       href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
       rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=Alef:400,700&subset=all'
+  <link href='//fonts.googleapis.com/css?family=Alef:400,700&subset=all'
         rel='stylesheet' type='text/css'>
 
   <!-- CSS -->
@@ -80,7 +79,7 @@
   <script type="text/javascript"
           src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   {#
-  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
   #}
   {#
   <script src="{{ STATIC_URL }}js/libs/nvd3/1.1.15-beta/nv.d3.js"></script>

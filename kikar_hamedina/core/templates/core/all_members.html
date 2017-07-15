@@ -75,7 +75,7 @@
                         {% elif member.facebook_persona and member.facebook_persona.get_main_feed and member.facebook_persona.get_main_feed.feed_type != 'PP' %}
                         <p>{% trans "Due to technical limitations, we can't collect data on private Facebook Users." %}</p>
                         <p>{% trans "You can check it out on " %}<a
-                                href="http://wwww.facebook.com/{{ member.facebook_persona.get_main_feed.vendor_id }}"
+                                href="//wwww.facebook.com/{{ member.facebook_persona.get_main_feed.vendor_id }}"
                                 target="_blank">{% trans 'Facebook' %}</a></p>
 
                     {% else %}
