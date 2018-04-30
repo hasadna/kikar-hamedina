@@ -57,7 +57,7 @@
                 <td><a href="{% url 'search-gui' %}{{ custom.path | path_to_params }}"><i class="fa fa-edit"></i></a>
                 </td>
                 <td><a id="notifier-link"
-                       href="http://notifs-dev-2.hasadna.org.il/add/kikar?type=custom&link=http://{{ request.get_host }}{% url 'custom-query-rss' custom.title %}"
+                       href="//notifs-dev-2.hasadna.org.il/add/kikar?type=custom&link=//{{ request.get_host }}{% url 'custom-query-rss' custom.title %}"
                        target="_blank"><i class="fa fa-bell"
                                           aria-hidden="true"></i></a>
                 </td>

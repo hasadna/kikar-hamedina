@@ -13,11 +13,11 @@ class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         for member in Member.objects.all():
             mk_id = member.id
-            search_url = 'http://www.knesset.gov.il/mk/heb/ShowPic.asp?mk_individual_id_t=%s' % mk_id
+            search_url = '//www.knesset.gov.il/mk/heb/ShowPic.asp?mk_individual_id_t=%s' % mk_id
             try:
                 page = urllib2.urlopen(search_url)
                 data = page.read()
-                res_url = 'http://www.knesset.gov.il/%s' % (
+                res_url = '//www.knesset.gov.il/%s' % (
                     re.search('mk/images/members/.*?.jpg',data).group(0))
                 member.img_url = res_url
                 member.save()
