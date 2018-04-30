@@ -1,0 +1,4 @@
+from facebook_feed_factory import FacebookFeedFactory
+from facebook_persona_factory import FacebookPersonaFactory
+from facebook_status_factory import FacebookStatusFactory
+from feed_popularity_factory import FeedPopularityFactory

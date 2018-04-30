@@ -13,13 +13,13 @@ You can see our live website at [kikar.org](http://www.kikar.org).
 
 
 #### Are a developer who's looking to get involved? ####
-Great! take a look at our [Trello Board](https://trello.com/b/gJFDhaJa/kikar-hamedina). In particular, 
-anything on the **MiniBites** list is up for grabs. We'd love your help!
+Great! take a look at our [GitHub Issues](https://github.com/hasadna/kikar-hamedina/issues). In particular, 
+anything labeled as **MiniBites** is a great place to startp with. We'd love your help!
 
 Please read below for project set-up instructions, and contribution guidelines.
 
 
-#### Are you interested in helping out, but not through coding? ####
+#### Are you interested in helping out, but not by coding? ####
 No worries, We might still have something for you. You are invited to 
 <a href="mailto:yotammanor@gmail.com?subject='I Want to Help with Kikar Hamedina'">contact us</a>, and we'll find you a place.
 
@@ -79,12 +79,14 @@ at `../../vagrant/kikar_hamedina`.
 
 ### Code Contribution Guidelines ###
  
- * **Task management** is done at our [Trello Board](https://trello.com/b/gJFDhaJa/kikar-hamedina). Keep it tidy.
- * Work is done on branch `dev`. Branch `master` is our production branch, and should always be downstream from `dev`.
- * Code should be committed (with meaningful messages!) and pushed to your forked repository. From there, 
- **pull request**. Please keep in mind that **Your Code will be reviewed. So write it well**.
- * Unfortunately, we currently rely on manual testing only. Feel free to start solving this at this very moment. Till then, make sure you didn't break anything.
+ * **Task management** is done here on GitHub. Keep the **issues** list tidy, assign yourself to task you take, and unassign as needed..
+ * New features should be branched from `dev`. Branch name should be the issues number e.g. `270`. 
+ * Commits should meet the [following guidelines](https://chris.beams.io/posts/git-commit/).
+ * In order to incorporate your code in `dev`, create a **pull request**. Please keep in mind that **Your Code will be reviewed. So write it well**.
+ * Our current testing framework is somewhat off (and the [issue](https://github.com/hasadna/kikar-hamedina/issues/275) that deals with it is aching for an assignee!). Until this issue is handled, manual testing is extra necessary.
+ * Branch `master` is our production branch, and should always be downstream from `dev`. Never commit directly to it, it won't be accepted in.
  
+
 ### Using Vagrant <a name="vagrant-instructions"></a> ###
 
 Here's a handy list of vagrant commands maintenance:
