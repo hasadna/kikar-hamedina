@@ -12,13 +12,9 @@
     <button type="button" class="close" data-dismiss="alert"><span
         aria-hidden="true">&times;</span><span
         class="sr-only">{% blocktrans %}Close{% endblocktrans %}</span></button>
-    <strong>{% blocktrans %}This project is still in
-      beta.{% endblocktrans %}</strong>
-    {% blocktrans %}If you found anything wrong here, we'd love
-      to{% endblocktrans %}
+    {% blocktrans %}If you found anything wrong here, we'd love to{% endblocktrans %}
     <a href="mailto:yotammanor@gmail.com?subject=כיכר המדינה - דיווח על תקלה">
-      {% blocktrans %}hear about
-        it!{% endblocktrans %}</a>
+      {% blocktrans %}hear about it!{% endblocktrans %}</a>
   </div>
 {% endblock %}
 
@@ -105,13 +101,16 @@
             <br>
             <br>
             {% blocktrans %}This site is a project by{% endblocktrans %}
-            <div id="hasadna-logo"><a href="//www.hasadna.org.il{% if LANGUAGE_CODE != 'he' %}/en/{% endif %}"
-                                      rel="nofollow"><img
-                    src="//www.hasadna.org.il/wp-content/themes/sadna2012/images/sadna-logo.png"
-                    id="hasadna-logo-img" alt=""><span>
-                {% blocktrans %}The Public Knowledge Workshop{% endblocktrans %}</span>
-                <span
-                        class="small"> ({% trans 'registered' %})</span></a></div>
+            <div id="hasadna-logo">
+              <a href="//www.hasadna.org.il{% if LANGUAGE_CODE != 'he' %}/en/{% endif %}"
+                 rel="nofollow">
+                <img src="{% static 'media/pkw_logo_tagline.jpg' %}"
+                     style="width: 200px;min-width: 30%; height: auto"
+                     id="hasadna-logo-img"
+                     title="{% blocktrans %}The Public Knowledge Workshop{% endblocktrans %} ({% trans 'registered' %})"
+                     alt="{% blocktrans %}The Public Knowledge Workshop{% endblocktrans %} ({% trans 'registered' %})">
+              </a>
+            </div>
         </div>
         <br>
 
@@ -123,19 +122,20 @@
     </div>
     <br/>
     <hr />
-    <div class="main-page-frame container col-lg-12">
+    <div class="main-page-frame container col-lg-12"  style="font-size: smaller">
       <img src="{% static 'media/EU flag plain.JPG' %}"
            alt="EU-logo" width="10%">
-      <p>This Project is supported by the European Union</p>
-      <p>פרויקט זה נתמך על ידי האיחוד האירופי</p>
-      <p dir="ltr" style="font-size: smaller">
+      <p>This Project is supported by the European Union
+        <br/>
+        פרויקט זה נתמך על ידי האיחוד האירופי</p>
+      <p dir="ltr">
         This publication has been produced with the assistance of the European
         Union. The
         contents of this publication are the sole responsibility of the Public
         Knowledge Workshop and can in no way be taken to reflect the views of the
         European Union.
       </p>
-      <p style="font-size: smaller">
+      <p>
         פרסום זה הופק בסיוע האיחוד האירופי. האחריות הבלעדית על תכניו של פרסום זה
         נתונה בידי הסדנא לידע ציבורי ואין להתייחס אליהם בשום אופן כמשקפים את עמדות
         האיחוד האירופי.
