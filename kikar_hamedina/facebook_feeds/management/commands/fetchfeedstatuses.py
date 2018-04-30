@@ -145,13 +145,19 @@ class Command(BaseCommand):
                     break
                 oldest_status = list_of_statuses[-1]
                 oldest_status_so_far = dateutil.parser.parse(oldest_status['created_time'])
-                if 'paging' in return_statuses:
+                is_next_page = ('paging' in return_statuses and
+                                'next' in return_statuses['paging'])
+
+                if is_next_page:
                     next_page = return_statuses['paging']['next']
                 else:
                     next_page = None
                 print('next_page exists:', bool(next_page))
-                while oldest_status_so_far.toordinal() >= from_date_ordinal and \
-                                try_number <= NUMBER_OF_TRIES_FOR_REQUEST and next_page:
+                continue_loop = (
+                    oldest_status_so_far.toordinal() >= from_date_ordinal and
+                    try_number <= NUMBER_OF_TRIES_FOR_REQUEST and
+                    next_page)
+                while continue_loop:
                     try:
                         response = json.loads(urllib2.urlopen(next_page).read())
                     except Exception:
