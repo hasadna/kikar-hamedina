@@ -155,7 +155,7 @@ msgstr "נשמח לשמוע!"
 
 #: core/templates/core/about_us.html:103
 msgid "This site is a project by"
-msgstr "אתר זה הוא פרויקט חממה של"
+msgstr "אתר זה הוא פרויקט של"
 
 #: core/templates/core/about_us.html:108
 msgid "The Public Knowledge Workshop"
@@ -163,7 +163,7 @@ msgstr "הסדנא לידע ציבורי"
 
 #: core/templates/core/about_us.html:110
 msgid "registered"
-msgstr "ע\"ר"
+msgstr "ע'ר"
 
 #: core/templates/core/all_members.html:5
 #: templates/layouts/generic-template.html:148

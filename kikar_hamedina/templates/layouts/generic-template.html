@@ -230,15 +230,19 @@
           class="navbar-form navbar-{% if LANGUAGE_BIDI %}left{% else %}right{% endif %} dropdown"
           id="search-bar-form" role="search">
         <div class="input-group" id="search-results-dropdown">
-          <input id="navbar-search-box" type="search" title={% trans 'search'
-          %} name="search_str"
-          class="form-control"
-          autocomplete="off"
-          placeholder="{% blocktrans %}Knesset Member, Party, a Subject
-          discussed, or any keyword...{% endblocktrans %}"
-          data-toggle="dropdown" role="combobox" aria-autocomplete="list"
-          aria-owns="search-results-list">
-          <ul id="search-results-list" class="dropdown-menu" role="listbox"
+          <input id="navbar-search-box"
+                 type="search"
+                 title={% trans 'search' %}name="search_str"
+                 class="form-control"
+                 autocomplete="off"
+                 placeholder="{% blocktrans %}Knesset Member, Party, a Subject discussed, or any keyword...{% endblocktrans %}"
+                 data-toggle="dropdown"
+                 role="combobox"
+                 aria-autocomplete="list"
+                 aria-owns="search-results-list">
+          <ul id="search-results-list"
+              class="dropdown-menu"
+              role="listbox"
               aria-expanded="false">
           </ul>
           <div class="input-group-btn">
@@ -263,7 +267,7 @@
           </a>
         </li>
         <li class="navbar-nav navbar-{% if LANGUAGE_BIDI %}right{% else %}left{% endif %}  hidden-md hidden-sm">
-          <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AZ8ZHE9EVN59Y"
+          <a href="http://www.hasadna.org.il/%D7%AA%D7%A8%D7%95%D7%9E%D7%94-2"
              class="navbar-options">
             {% blocktrans %}Donate{% endblocktrans %}
           </a>
@@ -307,7 +311,7 @@
               </a>
             </li>
             <li>
-              <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AZ8ZHE9EVN59Y"
+              <a href="http://www.hasadna.org.il/%D7%AA%D7%A8%D7%95%D7%9E%D7%94-2"
                  class="navbar-options">
                 {% blocktrans %}Donate{% endblocktrans %}
               </a>
