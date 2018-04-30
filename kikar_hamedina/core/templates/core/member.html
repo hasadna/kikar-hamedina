@@ -59,7 +59,7 @@
                 </p>
             {% endif %}
             <p>&nbsp;<i class="fa fa-facebook-square"></i>&nbsp;<a
-                    href="http://www.facebook.com/{{ feed.vendor_id }}"
+                    href="//www.facebook.com/{{ feed.vendor_id }}"
                     target="_blank">{{ object.name }}</a> {% trans 'On Facebook' %}
             </p>
             <p>&nbsp;<i class="fa fa-clock-o"></i> {% trans 'Last Collected Status at' %}:
@@ -86,7 +86,7 @@
     {% if object.facebook_persona and object.facebook_persona.get_main_feed.feed_type == 'UP' %}
         <p>{% trans "Due to technical limitations, we can't collect data on private Facebook Users." %}</p>
         <p>{% trans "You can check it out on " %}<a
-                href="http://wwww.facebook.com/{{ object.facebook_persona.get_main_feed.vendor_id }}"
+                href="//wwww.facebook.com/{{ object.facebook_persona.get_main_feed.vendor_id }}"
                 target="_blank">{% trans 'Facebook' %}</a>.
         </p>
         <p>

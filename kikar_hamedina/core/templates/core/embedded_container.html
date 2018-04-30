@@ -8,7 +8,7 @@
 
     <!-- Fonts -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Alef:400,700&subset=all' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Alef:400,700&subset=all' rel='stylesheet' type='text/css'>
 
     <!-- CSS -->
     {% if LANGUAGE_BIDI %}
@@ -20,9 +20,7 @@
 
     <!-- JS -->
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    {#    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>#}
-    {#    <script src="{{ STATIC_URL }}js/libs/nvd3/1.1.15-beta/nv.d3.js"></script>#}
-    <script type="text/javascript" src="{{ STATIC_URL }}js/libs/bootstrap/bootstrap.js"></script>
+     <script type="text/javascript" src="{{ STATIC_URL }}js/libs/bootstrap/bootstrap.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/libs/handlebars/handlebars-v1.3.0.js"></script>
 
     <!-- jQueryUI - autocomplete -->
@@ -43,7 +41,7 @@
 
 </head>
 <body>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="//code.jquery.com/jquery-latest.js"></script>
 <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
 {% if request.path == '/preview/' %}
     <script src="{{ STATIC_URL }}js/renderLinksForStatusListHandlers.js"></script>
@@ -51,10 +49,6 @@
 <script src="{{ STATIC_URL }}js/updateStatusPanelsThroughEndlessPagination.js"></script>
 {% load humanize %}
 {% load core_extras %}
-
-{##}
-{#<div id="fb-root"></div>#}
-{#<script src="{{ STATIC_URL }}js/fbInit.js"></script>#}
 
 <div> {% include "core/facebook_status_list.html" with object_list=object_list %}
 </div>

@@ -15,7 +15,7 @@ from mks.managers import (
     BetterManager, KnessetManager, CurrentKnessetMembersManager,
     CurrentKnessetPartyManager)
 
-OK_BASE_URL = "http://oknesset.org"
+OK_BASE_URL = "//oknesset.org"
 
 GENDER_CHOICES = (
     (u'M', _('Male')),
