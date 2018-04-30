@@ -163,7 +163,10 @@ class Command(BaseCommand):
                         continue
                     list_of_statuses += response['data']
                     oldest_status_so_far = dateutil.parser.parse(list_of_statuses[-1]['created_time'])
-                    if not 'paging' in response:
+                    no_next_page = (
+                                not 'paging' in response or
+                                not 'next' in response.get('paging', {}))
+                    if no_next_page:
                         print('no more pages for this response.')
                         break
                     next_page = response['paging']['next']
