@@ -1,321 +1,355 @@
 <!DOCTYPE html>
 {% load i18n %}
 {% load core_extras %}
-
+{% load staticfiles %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description"
-          content="{% blocktrans %}Today, around a 100 of the Knesset Members are
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description"
+        content="{% blocktrans %}Today, around a 100 of the Knesset Members are
           using Facebook on a daily basis. We collect and organize what they write,
            and help you join the conversation. A project by the Public Knowledge
             Workshop.{% endblocktrans %}">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    {% load staticfiles %}
-    {% load kikartags_extras %}
-    <title>{% block title %}{% endblock title %}
-        {% blocktrans %}| Kikar Hamedina{% endblocktrans %}
-    </title>
-    <meta name="License" content="CC-by-sa-3.0 Attribution-NonCommercial-ShareAlike 3.0">
-    {% block social_share %}
-        <!-- Open graph meta tags supported by facebook, whatsapp, linkedin and more -->
-        <meta property="og:image" content="http://kikar.org/static/media/kikar_hamedina_logo_900_472.png"/>
-        <meta property="fb:app_id" content="711830842197328"/>
-        <meta property="og:title" content="{% trans 'Kikar Hamedina' %}">
-        <meta property="og:description" content="{% blocktrans %}Today, around a 100 of the Knesset Members are
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  {% load staticfiles %}
+  {% load kikartags_extras %}
+  <title>{% block title %}{% endblock title %}
+    {% blocktrans %}| Kikar Hamedina{% endblocktrans %}
+  </title>
+  <meta name="License"
+        content="CC-by-sa-3.0 Attribution-NonCommercial-ShareAlike 3.0">
+  {% block social_share %}
+  <!-- Open graph meta tags supported by facebook, whatsapp, linkedin and more -->
+  <meta property="og:image"
+        content="https://kikar.org/static/media/kikar_hamedina_logo_900_472.png"/>
+  <meta property="fb:app_id" content="711830842197328"/>
+  <meta property="og:title" content="{% trans 'Kikar Hamedina' %}">
+  <meta property="og:description" content="{% blocktrans %}Today, around a 100 of the Knesset Members are
           using Facebook on a daily basis. We collect and organize what they write,
            and help you join the conversation. A project by the Public Knowledge
             Workshop.{% endblocktrans %}">
-        <meta property="og:url" content="http://kikar.org//">
-        <meta property="og:site_name" content="{% trans 'Kikar Hamedina' %}">
-        {#        <meta property="og:image:secure_url" content="https://kikar.org/static/media/kikar_hamedina_logo.png">#}
+  <meta property="og:url" content="https://kikar.org//">
+  <meta property="og:site_name" content="{% trans 'Kikar Hamedina' %}">
 
-        <!-- Twitter -->
-        <meta name="twitter:card" content="summary_large_image"/>
-        <meta name="twitter:title" content="{% trans 'Kikar Hamedina' %}"/>
-        <meta name="twitter:description" content="{% blocktrans %}Today, around a 100 of the Knesset Members are
+  <meta property="og:image:secure_url"
+        content="https://kikar.org/static/media/kikar_hamedina_logo.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="{% trans 'Kikar Hamedina' %}"/>
+  <meta name="twitter:description" content="{% blocktrans %}Today, around a 100 of the Knesset Members are
           using Facebook on a daily basis. We collect and organize what they write,
            and help you join the conversation. A project by the Public Knowledge
             Workshop.{% endblocktrans %}"/>
-        <meta name="twitter:image" content="http://kikar.org/static/media/kikar_hamedina_logo_506_256.png"/>
+  <meta name="twitter:image"
+        content="https://kikar.org/static/media/kikar_hamedina_logo_506_256.png"/>
 
-        <!-- For some other bots-->
-        <link rel="image_src" href="{% static '"media/kikar_hamedina_logo.png"' %}"/>
-
-
-    {% endblock %}
-
-    <!-- Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Alef:400,700&subset=all' rel='stylesheet' type='text/css'>
-
-    <!-- CSS -->
-    {% if LANGUAGE_BIDI %}
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-    {% endif %}
-    {#    <!-- CSS NVD3 -->#}
-    {#    <link href="{{ STATIC_URL }}css/nv.d3.css" rel="stylesheet">#}
-    <!-- Bootstrap Localed Theme -->
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/{{ LANGUAGE_CODE }}/bootstrap.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/{{ LANGUAGE_CODE }}/bootstrap-theme.css"/>
-
-    <!-- JS -->
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    {#    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>#}
-    {#    <script src="{{ STATIC_URL }}js/libs/nvd3/1.1.15-beta/nv.d3.js"></script>#}
-    <script type="text/javascript" src="{{ STATIC_URL }}js/libs/bootstrap/bootstrap.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/libs/handlebars/handlebars-v1.3.0.js"></script>
-
-    <!-- jQueryUI - autocomplete -->
-    <link rel="stylesheet"
-          href="{{ STATIC_URL }}jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css"/>
-    <script type="text/javascript"
-            src="{{ STATIC_URL }}jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
-
-    <!-- Our JS -->
-    <script type="text/javascript" src="{{ STATIC_URL }}js/searchBar.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/updateStatusPanels.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/addTagToStatus.js"></script>
-
-    <!-- Our CSS -->
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/{{ LANGUAGE_CODE }}/main-{{ LANGUAGE_CODE }}.css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/searchBar.css"/>
-
-    <!-- Favicon links -->
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ STATIC_URL }}media/favicons/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ STATIC_URL }}media/favicons/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ STATIC_URL }}media/favicons/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ STATIC_URL }}media/favicons/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ STATIC_URL }}media/favicons/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ STATIC_URL }}media/favicons/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ STATIC_URL }}media/favicons/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ STATIC_URL }}media/favicons/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ STATIC_URL }}media/favicons/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ STATIC_URL }}media/favicons/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ STATIC_URL }}media/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{ STATIC_URL }}media/favicons/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ STATIC_URL }}media/favicons/favicon-16x16.png">
-    <link rel="manifest" href="{{ STATIC_URL }}media/favicons/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
-    {% block link %}
-    {% endblock %}
-
-    {% block scripts %}
-    {% endblock %}
-
-    <!-- Handelbar Templates -->
+  <!-- For some other bots-->
+  <link rel="image_src" href="{% static 'media/kikar_hamedina_logo.png' %}"/>
 
 
-    {% block handlebar_templates %}
-    {% endblock %}
+  {% endblock %}
 
-    {% verbatim %}
+  <!-- Fonts -->
+  <link
+      href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+      rel="stylesheet">
+  <link href='//fonts.googleapis.com/css?family=Alef:400,700&subset=all'
+        rel='stylesheet' type='text/css'>
 
-        <!-- Templates for the search bar autocomplete -->
-        <script id="result-member-list-item-template" type="text/x-handlebars-template">
+  <!-- CSS -->
+  {% if LANGUAGE_BIDI %}
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+        rel="stylesheet">
+  {% endif %}
+  <!-- Bootstrap Localed Theme -->
+  <link rel="stylesheet"
+        href="{{ STATIC_URL }}css/{{ LANGUAGE_CODE }}/bootstrap.css">
+  <link rel="stylesheet"
+        href="{{ STATIC_URL }}css/{{ LANGUAGE_CODE }}/bootstrap-theme.css"/>
 
-        <li class="result-container">
-        <a href="{% endverbatim %}{% if LANGUAGE_CODE != 'he' %}/{{ LANGUAGE_CODE }}{% endif %}{% verbatim %}/member/{{ id }}"
-    tabindex="-1" id="option-{{ count }}" role="option">
-        <div class="result-main-text"><i class="fa fa-user"></i> {{ name }}</div>
+  <!-- JS -->
+  <script type="text/javascript"
+          src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+  <script type="text/javascript"
+          src="{{ STATIC_URL }}js/libs/bootstrap/bootstrap.js"></script>
+  <script type="text/javascript"
+          src="{{ STATIC_URL }}js/libs/handlebars/handlebars-v1.3.0.js"></script>
+
+  <!-- jQueryUI - autocomplete -->
+  <link rel="stylesheet"
+        href="{{ STATIC_URL }}jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css"/>
+  <script type="text/javascript"
+          src="{{ STATIC_URL }}jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
+
+  <!-- Our JS -->
+  <script type="text/javascript"
+          src="{{ STATIC_URL }}js/searchBar.js"></script>
+  <script type="text/javascript"
+          src="{{ STATIC_URL }}js/updateStatusPanels.js"></script>
+  <script type="text/javascript"
+          src="{{ STATIC_URL }}js/addTagToStatus.js"></script>
+
+  <!-- Our CSS -->
+  <link rel="stylesheet"
+        href="{{ STATIC_URL }}css/{{ LANGUAGE_CODE }}/main-{{ LANGUAGE_CODE }}.css"/>
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/searchBar.css"/>
+
+  <!-- Favicon links -->
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="{{ STATIC_URL }}media/favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="{{ STATIC_URL }}media/favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="{{ STATIC_URL }}media/favicons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="{{ STATIC_URL }}media/favicons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="{{ STATIC_URL }}media/favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="{{ STATIC_URL }}media/favicons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="{{ STATIC_URL }}media/favicons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="{{ STATIC_URL }}media/favicons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="{{ STATIC_URL }}media/favicons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="{{ STATIC_URL }}media/favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="{{ STATIC_URL }}media/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="{{ STATIC_URL }}media/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="{{ STATIC_URL }}media/favicons/favicon-16x16.png">
+  <link rel="manifest" href="{{ STATIC_URL }}media/favicons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  {% block link %}
+  {% endblock %}
+
+  {% block scripts %}
+  {% endblock %}
+
+  <!-- Handelbar Templates -->
+
+
+  {% block handlebar_templates %}
+  {% endblock %}
+
+  {% verbatim %}
+
+  <!-- Templates for the search bar autocomplete -->
+  <script id="result-member-list-item-template"
+          type="text/x-handlebars-template">
+
+    <li class="result-container">
+      <a href="{% endverbatim %}{% if LANGUAGE_CODE != 'he' %}/{{ LANGUAGE_CODE }}{% endif %}{% verbatim %}/member/{{ id }}"
+         tabindex="-1" id="option-{{ count }}" role="option">
+        <div class="result-main-text"><i class="fa fa-user"></i> {{ name }}
+        </div>
         <div class="result-sub-text">{{ party }}</div>
         <div class="result-sub-text"></div>
-    </a>
+      </a>
     </li>
-    </script>
-    <script id="result-tag-list-item-template" type="text/x-handlebars-template">
+  </script>
+  <script id="result-tag-list-item-template" type="text/x-handlebars-template">
     <li class="result-container">
-    <a href="{% endverbatim %}{% if LANGUAGE_CODE != 'he' %}/{{ LANGUAGE_CODE }}{% endif %}{% verbatim %}/tag/name/{{ name }}"
-    tabindex="-1" id="option-{{ count }}" role="option">
-        <div class="result-main-text"><i class="fa fa-tag"></i> {{ name }}</div></a>
+      <a href="{% endverbatim %}{% if LANGUAGE_CODE != 'he' %}/{{ LANGUAGE_CODE }}{% endif %}{% verbatim %}/tag/name/{{ name }}"
+         tabindex="-1" id="option-{{ count }}" role="option">
+        <div class="result-main-text"><i class="fa fa-tag"></i> {{ name }}
+        </div>
+      </a>
     </li>
-    </script>
-    <script id="result-party-list-item-template" type="text/x-handlebars-template">
+  </script>
+  <script id="result-party-list-item-template"
+          type="text/x-handlebars-template">
     <li class="result-container">
-    <a href="{% endverbatim %}{% if LANGUAGE_CODE != 'he' %}/{{ LANGUAGE_CODE }}{% endif %}{% verbatim %}/party/{{ id }}"
-    tabindex="-1" id="option-{{ count }}" role="option">
-        <div class="result-main-text"><i class="fa fa-group"></i> {{ name }}</div></a>
+      <a href="{% endverbatim %}{% if LANGUAGE_CODE != 'he' %}/{{ LANGUAGE_CODE }}{% endif %}{% verbatim %}/party/{{ id }}"
+         tabindex="-1" id="option-{{ count }}" role="option">
+        <div class="result-main-text"><i class="fa fa-group"></i> {{ name }}
+        </div>
+      </a>
     </li>
-    </script>
-    <script id="result-default-link-all-mks-template" type="text/x-handlebars-template">
+  </script>
+  <script id="result-default-link-all-mks-template"
+          type="text/x-handlebars-template">
     <li class="result-container" style="background-color: beige">
-    <a href="{% endverbatim %}{% url 'all-members' %}{% verbatim %}" tabindex="-1" id="option-{{ count }}" role="option">
-    <div class="result-main-text"><i class="fa fa-bookmark"></i>{% endverbatim %}
-    {% trans 'All MKs' %}{% verbatim %}</div></a>
-        </li>
-        </script>
-    {% endverbatim %}
+      <a href="{% endverbatim %}{% url 'all-members' %}{% verbatim %}"
+         tabindex="-1" id="option-{{ count }}" role="option">
+        <div class="result-main-text"><i class="fa fa-bookmark"></i>{% endverbatim %}{% trans 'All MKs' %}{% verbatim %}
+        </div>
+      </a>
+    </li>
+  </script>
+  {% endverbatim %}
 
-    <!-- Google Analytics -->
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-73675224-1', 'auto');
-        ga('send', 'pageview');
-    </script>
+  <!-- Google Analytics -->
+  <script>
+      (function (i, s, o, g, r, a, m) {
+          i['GoogleAnalyticsObject'] = r;
+          i[r] = i[r] || function () {
+                  (i[r].q = i[r].q || []).push(arguments)
+              }, i[r].l = 1 * new Date();
+          a = s.createElement(o),
+              m = s.getElementsByTagName(o)[0];
+          a.async = 1;
+          a.src = g;
+          m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+      ga('create', 'UA-73675224-1', 'auto');
+      ga('send', 'pageview');
+  </script>
 </head>
-<body data-lang="{% if LANGUAGE_CODE != 'he' %}/{{ LANGUAGE_CODE }}{% endif %}" data-lang-dir="{{ LANGUAGE_BIDI }}">
+<body data-lang="{% if LANGUAGE_CODE != 'he' %}/{{ LANGUAGE_CODE }}{% endif %}"
+      data-lang-dir="{{ LANGUAGE_BIDI }}">
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand photo-container" href="{% url 'index' %}">
-                <img src="{{ STATIC_URL }}media/kikar_hamedina_logo.png" class="logo-photo"
-                     alt="{% trans 'Kikar Hamedina' %}">
-            </a>
-        </div>
-
-        <div class="col-sm-6 collapse navbar-collapse" id="searchbar-searchform-container">
-            <div class="navbar-form navbar-{% if LANGUAGE_BIDI %}left{% else %}right{% endif %} dropdown"
-                 id="search-bar-form" role="search">
-                <div class="input-group" id="search-results-dropdown">
-                    <input id="navbar-search-box" type="search" title={% trans 'search' %} name="search_str"
-                           class="form-control"
-                           autocomplete="off"
-                           placeholder="{% blocktrans %}Knesset Member, Party, a Subject discussed, or any keyword...{% endblocktrans %}"
-                           data-toggle="dropdown" role="combobox" aria-autocomplete="list"
-                           aria-owns="search-results-list">
-                    <ul id="search-results-list" class="dropdown-menu" role="listbox" aria-expanded="false">
-                    </ul>
-                    <div class="input-group-btn">
-                        <button class="btn btn-success" id="search-bar-submit" data-target="{% url 'search' %}"
-                                type="button"><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-
-                <li class="navbar-nav navbar-{% if LANGUAGE_BIDI %}right{% else %}left{% endif %} hidden-md hidden-sm">
-                    <a href="{% url 'billboards' %}" class="navbar-options">
-                        {% blocktrans %}Billboards{% endblocktrans %}
-                    </a>
-                </li>
-                <li class="navbar-nav navbar-{% if LANGUAGE_BIDI %}right{% else %}left{% endif %}  hidden-md hidden-sm">
-                    <a href="{% url 'about' %}" class="navbar-options">
-                        {% blocktrans %}About{% endblocktrans %}
-                    </a>
-                </li>
-                <li class="navbar-nav navbar-{% if LANGUAGE_BIDI %}right{% else %}left{% endif %}  hidden-md hidden-sm">
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AZ8ZHE9EVN59Y"
-                       class="navbar-options">
-                        {% blocktrans %}Donate{% endblocktrans %}
-                    </a>
-                </li>
-
-                {% with current_clean_path=request.get_full_path|language_clean_uri %}
-                    <li class="navbar-nav navbar-{% if LANGUAGE_BIDI %}right{% else %}left{% endif %} hidden-xs language-navbar">
-                        <a href="{{ current_clean_path }}" class="navbar-options"
-                           id="language-navbar-he"><span
-                                class="badge">ע</span></a>
-                    </li>
-                    <li class="navbar-nav navbar-{% if LANGUAGE_BIDI %}right{% else %}left{% endif %}  hidden-xs language-navbar">
-                        <a href="/en{{ current_clean_path }}" class="navbar-options"
-                           id="language-navbar-en"><span
-                                class="badge">En</span></a>
-
-                    </li>
-                    {#                    <li class="navbar-nav navbar-{% if LANGUAGE_BIDI %}right{% else %}left{% endif %}  hidden-md hidden-sm language-navbar">#}
-                    {#                        <a href="/ar{{ current_clean_path }}" class="navbar-options" id="language-navbar-ar"><span#}
-                    {#                                class="badge">ع</span></a>#}
-                    {#                    </li>#}
-                {% endwith %}
-                {% if user.is_authenticated %}
-                    <li class="navbar-nav navbar-{% if LANGUAGE_BIDI %}right{% else %}left{% endif %} hidden-md hidden-sm">
-                        <a href="{% url 'untagged' %}" class="navbar-options">
-                            {% blocktrans %}Tagging{% endblocktrans %}
-                        </a>
-                    </li>
-                    {#                    <li class="navbar-nav navbar-{% if LANGUAGE_BIDI %}right{% else %}left{% endif %} hidden-md hidden-sm">#}
-                    {#                        <a href="{% url 'zinnia:entry_archive_index' %}" class="navbar-options">#}
-                    {#                            {% blocktrans %}Blog{% endblocktrans %}#}
-                    {#                        </a>#}
-                    {#                    </li>#}
-                {% endif %}
-                <!-- <li class="active"><a href="#">פוליטיקאים</a></li> -->
-                <!-- <li><a href="#about">מפלגות</a></li> -->
-                <!-- <li><a href="#contact">נושאים</a></li> -->
-                <li class="dropdown hidden-lg hidden-xs">
-                    <a href="" class="dropdown-toggle navbar-options" data-toggle="dropdown">
-                        {% blocktrans %}Options{% endblocktrans %}
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="{% url 'billboards' %}" class="navbar-options">
-                                {% blocktrans %}Billboards{% endblocktrans %}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'about' %}" class="navbar-options">
-                                {% blocktrans %}About{% endblocktrans %}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AZ8ZHE9EVN59Y"
-                               class="navbar-options">
-                                {% blocktrans %}Donate{% endblocktrans %}
-                            </a>
-                        </li>
-                        {% if user.is_authenticated %}
-                            <li>
-                                <a href="{% url 'untagged' %}" class="navbar-options">
-                                    {% blocktrans %}Tagging{% endblocktrans %}
-                                </a>
-                            </li>
-                            {#                            <li>#}
-                            {#                                <a href="{% url 'zinnia:entry_archive_index' %}" class="navbar-options">#}
-                            {#                                    {% blocktrans %}Blog{% endblocktrans %}#}
-                            {#                                </a>#}
-                            {#                            </li>#}
-                        {% endif %}
-                    </ul>
-                </li>
-            </ul>
-
-        </div>
-        <!--/.nav-collapse -->
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse"
+              data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand photo-container" href="{% url 'index' %}">
+        <img src="{{ STATIC_URL }}media/kikar_hamedina_logo.png"
+             class="logo-photo"
+             alt="{% trans 'Kikar Hamedina' %}">
+      </a>
     </div>
+
+    <div class="col-sm-6 collapse navbar-collapse"
+         id="searchbar-searchform-container">
+      <div
+          class="navbar-form navbar-{% if LANGUAGE_BIDI %}left{% else %}right{% endif %} dropdown"
+          id="search-bar-form" role="search">
+        <div class="input-group" id="search-results-dropdown">
+          <input id="navbar-search-box"
+                 type="search"
+                 title={% trans 'search' %}name="search_str"
+                 class="form-control"
+                 autocomplete="off"
+                 placeholder="{% blocktrans %}Knesset Member, Party, a Subject discussed, or any keyword...{% endblocktrans %}"
+                 data-toggle="dropdown"
+                 role="combobox"
+                 aria-autocomplete="list"
+                 aria-owns="search-results-list">
+          <ul id="search-results-list"
+              class="dropdown-menu"
+              role="listbox"
+              aria-expanded="false">
+          </ul>
+          <div class="input-group-btn">
+            <button class="btn btn-success" id="search-bar-submit"
+                    data-target="{% url 'search' %}"
+                    type="button"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+
+        <li class="navbar-nav navbar-{% if LANGUAGE_BIDI %}right{% else %}left{% endif %} hidden-md hidden-sm">
+          <a href="{% url 'billboards' %}" class="navbar-options">
+            {% blocktrans %}Billboards{% endblocktrans %}
+          </a>
+        </li>
+        <li class="navbar-nav navbar-{% if LANGUAGE_BIDI %}right{% else %}left{% endif %}  hidden-md hidden-sm">
+          <a href="{% url 'about' %}" class="navbar-options">
+            {% blocktrans %}About{% endblocktrans %}
+          </a>
+        </li>
+        <li class="navbar-nav navbar-{% if LANGUAGE_BIDI %}right{% else %}left{% endif %}  hidden-md hidden-sm">
+          <a href="http://www.hasadna.org.il/%D7%AA%D7%A8%D7%95%D7%9E%D7%94-2"
+             class="navbar-options">
+            {% blocktrans %}Donate{% endblocktrans %}
+          </a>
+        </li>
+
+        {% with current_clean_path=request.get_full_path|language_clean_uri %}
+        <li class="navbar-nav navbar-{% if LANGUAGE_BIDI %}right{% else %}left{% endif %} hidden-xs language-navbar">
+          <a href="{{ current_clean_path }}" class="navbar-options"
+             id="language-navbar-he"><span
+              class="badge">ע</span></a>
+        </li>
+        <li class="navbar-nav navbar-{% if LANGUAGE_BIDI %}right{% else %}left{% endif %}  hidden-xs language-navbar">
+          <a href="/en{{ current_clean_path }}" class="navbar-options"
+             id="language-navbar-en"><span
+              class="badge">En</span></a>
+
+        </li>
+        {% endwith %}
+        {% if user.is_authenticated %}
+        <li class="navbar-nav navbar-{% if LANGUAGE_BIDI %}right{% else %}left{% endif %} hidden-md hidden-sm">
+          <a href="{% url 'untagged' %}" class="navbar-options">
+            {% blocktrans %}Tagging{% endblocktrans %}
+          </a>
+        </li>
+        {% endif %}
+        <li class="dropdown hidden-lg hidden-xs">
+          <a href="" class="dropdown-toggle navbar-options"
+             data-toggle="dropdown">
+            {% blocktrans %}Options{% endblocktrans %}
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="{% url 'billboards' %}" class="navbar-options">
+                {% blocktrans %}Billboards{% endblocktrans %}
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'about' %}" class="navbar-options">
+                {% blocktrans %}About{% endblocktrans %}
+              </a>
+            </li>
+            <li>
+              <a href="http://www.hasadna.org.il/%D7%AA%D7%A8%D7%95%D7%9E%D7%94-2"
+                 class="navbar-options">
+                {% blocktrans %}Donate{% endblocktrans %}
+              </a>
+            </li>
+            {% if user.is_authenticated %}
+            <li>
+              <a href="{% url 'untagged' %}" class="navbar-options">
+                {% blocktrans %}Tagging{% endblocktrans %}
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+      </ul>
+
+    </div>
+    <!--/.nav-collapse -->
+  </div>
 </div>
 
 {% block body %}
-    <div class="container">
+<div class="container">
 
-        <div id="context-header">
-            <div class="page-header">
-                <h1>
-                    {% block h1 %}
-                    {% endblock %}
-                </h1>
-            </div>
-        </div>
-        {% block context-header %}
+  <div id="context-header">
+    <div class="page-header">
+      <h1>
+        {% block h1 %}
         {% endblock %}
-
-        {% block main_content %}
-        {% endblock %}
-
+      </h1>
     </div>
+  </div>
+  {% block context-header %}
+  {% endblock %}
+
+  {% block main_content %}
+  {% endblock %}
+
+</div>
 {% endblock body %}
 
 </body>

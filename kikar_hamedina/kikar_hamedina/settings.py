@@ -1,12 +1,14 @@
 import os
-from os.path import dirname, abspath, join
+import sys
 
 import dj_database_url
 
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
-REPOSITORY_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, os.path.pardir))
+PROJECT_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), os.path.pardir))
+REPOSITORY_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), os.path.pardir, os.path.pardir))
 
-sub_path = lambda *x: os.path.join(PROJECT_ROOT, *x)
+sub_path = lambda *x: os.path.join(PROJECT_ROOT, *x)  # noqa: E731
 
 # Configuring LOGS_ROOT
 LOGS_ROOT = sub_path("logs")
@@ -55,7 +57,8 @@ TEMPLATES = [
     },
 ]
 
-SECRET_KEY = 'yz2HiIDgrCDeHSfJSXIep3FeEQun!VhLXNCZ'  # This secret key SHOULD be over-run by a local_settings parameter.
+SECRET_KEY = (
+    'yz2HiIDgrCDeHSfJSXIep3FeEQun!VhLXNCZ')  # override in local_settings.py
 
 # Application definition
 
@@ -103,11 +106,6 @@ INSTALLED_APPS = (
     'actstream',  # Needs to be last
 )
 
-# MIGRATION_MODULES = {
-#    # key: app name, value: a fully qualified package name, not the usual `app_label.something_else`
-# 'actstream': 'kikar_hamedina.migrations.actstream',
-# }
-
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'solid_i18n.middleware.SolidLocaleMiddleware',
@@ -128,7 +126,8 @@ ROOT_URLCONF = 'kikar_hamedina.urls'
 WSGI_APPLICATION = 'kikar_hamedina.wsgi.application'
 
 # schema://user:password@localhost:5432/db_name
-config = dj_database_url.config(default='postgres://kikar:kikar@localhost:5432/kikar')
+config = dj_database_url.config(
+    default='postgres://kikar:kikar@localhost:5432/kikar')
 DATABASES = {'default': config}
 
 # Default language, that will be used for requests without language prefix
@@ -189,7 +188,6 @@ SESSION_COOKIE_NAME = "myplanetid"
 CURRENT_KNESSET_NUMBER = 20
 CURRENT_ELECTED_KNESSET_NUMBER = CURRENT_KNESSET_NUMBER + 1
 
-# In elections mode e.g. Knesset candidates are shown instead of Knesset members
 IS_ELECTIONS_MODE = False
 
 LOGGING = {
@@ -197,7 +195,9 @@ LOGGING = {
     'disable_existing_loggers': True,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            'format': (
+                '%(levelname)s %(asctime)s %(module)s %(process)d '
+                '%(thread)d %(message)s')
         },
         'simple': {
             'format': '%(levelname)s - %(asctime)s - %(message)s'
@@ -213,7 +213,8 @@ LOGGING = {
         'scraping': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '%s/scarping.log' % os.path.join(REPOSITORY_ROOT, 'log'),
+            'filename': '%s/scarping.log' % os.path.join(REPOSITORY_ROOT,
+                                                         'log'),
             'maxBytes': 1024 * 1024 * 10,  # 10MB each log file
             'backupCount': 10,
             'formatter': 'simple'
@@ -257,10 +258,24 @@ TASTYPIE_DEFAULT_FORMATS = ['json']
 
 NUMBER_OF_TRIES_FOR_REQUEST = 2
 
-try:
-    from .local_settings import *
-except ImportError:
-    pass
+TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
+
+if TESTING:
+    class DisableMigrations(object):
+        '''
+            this is a workaround for an issue with django==1.8
+            where the migrations that run before tests are too slow.
+            This workaround skips migrations in tests
+            see https://code.djangoproject.com/ticket/23745
+        '''
+
+        def __contains__(self, item):
+            return True
+
+        def __getitem__(self, item):
+            return "nomigrations"
+
+    MIGRATION_MODULES = DisableMigrations()
 
 if "TRAVIS" in os.environ:
     DATABASES = {
@@ -279,3 +294,10 @@ if "TRAVIS" in os.environ:
     FACEBOOK_APP_ID = '1090127617700980'
     FACEBOOK_SECRET_KEY = 'fd9b75e36b581192447e8eca1ade8ee3'
     FACEBOOK_API_VERSION = 'v2.7'
+
+    TESTING = False
+
+try:
+    from .local_settings import *  # noqa
+except ImportError:
+    pass

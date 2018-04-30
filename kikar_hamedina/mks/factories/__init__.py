@@ -1,0 +1,3 @@
+from knesset_factory import KnessetFactory
+from member_factory import MemberFactory
+from party_factory import PartyFactory

@@ -4,7 +4,7 @@ ipython
 django-extensions==1.5.9
 djangorestframework==2.3.10
 facebook-sdk==1.0.0
-psycopg2==2.5.3
+psycopg2==2.7
 python-mimeparse==0.1.4
 six==1.10.0
 wsgiref==0.1.2
@@ -37,8 +37,6 @@ functools32==3.2.3-2
 django-waffle==0.11.1
 
 django-debug-toolbar>=1.0
-nose
-django-nose
 pillow
 feedparser
 django-mailer
@@ -47,3 +45,4 @@ django-pagination==1.0.7
 django-tagging==0.3.6
 django-modeltranslation==0.10.2
 django-cors-headers==1.1.0
+factory_boy==2.9.2

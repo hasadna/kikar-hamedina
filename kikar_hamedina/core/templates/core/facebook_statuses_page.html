@@ -13,43 +13,7 @@
     <div id="fb-root"></div>
     <script src="{{ STATIC_URL }}js/fbInit.js"></script>
 
-    <!-- For autocomplete for tagging. Can be moved somewhere else -->
-    <!-- TODO: availableTags. -->
-    <script>
-        // not being used... was causing an error in the console when loading politicians page
-        //     $(function () {
-        //         // TODO: make this the list of available tags. at the moment it's suggesting nonsense for autocomplete
-        //         var availableTags = [
-        //             // "ActionScript",
-        //             // "AppleScript",
-        //             // "Asp",
-        //             // "BASIC",
-        //             // "C",
-        //             // "C++",
-        //             // "Clojure",
-        //             // "COBOL",
-        //             // "ColdFusion",
-        //             // "Erlang",
-        //             // "Fortran",
-        //             // "Groovy",
-        //             // "Haskell",
-        //             // "Java",
-        //             // "JavaScript",
-        //             // "Lisp",
-        //             // "Perl",
-        //             // "PHP",
-        //             // "Python",
-        //             // "Ruby",
-        //             // "Scala",
-        //             // "Scheme"
-        //         ];
-        //         $(".add-tag").autocomplete({
-        //             source: availableTags
-        //         });
-        //     });
-    </script>
-
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="//code.jquery.com/jquery-latest.min.js"></script>
     <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
     <script src="{{ STATIC_URL }}js/renderLinksForStatusListHandlers.js"></script>
     <script src="{{ STATIC_URL }}js/updateStatusPanelsThroughEndlessPagination.js"></script>

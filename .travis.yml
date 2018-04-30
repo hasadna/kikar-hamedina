@@ -1,3 +1,4 @@
+sudo: false
 language: python
 cache: pip
 python:
@@ -7,22 +8,23 @@ before_install:
   - export DJANGO_SETTINGS_MODULE=kikar_hamedina.settings
   - export PYTHONPATH=$PYTHONPATH:$HOME/build/hasadna/kikar-hamedina/kikar_hamedina
 
-install: "pip install -r requirements/vps.txt"
+install:
+ - "pip install pip -U"
+ - "pip install -r requirements/vps.txt"
+ - "pip install coveralls"
 
 services: postgresql
 
+addons:
+  postgresql: "9.3"
+
+
 before_script:
-  # Prepare DB
   - psql -c "CREATE DATABASE travisci;" -U postgres
   - python kikar_hamedina/manage.py migrate
-  - python kikar_hamedina/manage.py loaddata fixture data_fixture_mks.json --app mks
-  - python kikar_hamedina/manage.py loaddata fixture data_fixture_facebook_feeds.json --app facebook_feeds
 
-  # Run server
-  - python kikar_hamedina/manage.py runserver localhost:8000 &
-  - sleep 3
 script:
-  - nosetests
+  - cd kikar_hamedina; coverage run  --source=. manage.py test
 
 after_script:
   - coveralls
