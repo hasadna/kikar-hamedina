@@ -8,18 +8,19 @@ services:
       - "8000"
     ports:
       -  "8000:8000"
-      -  "5433:5432"
     links:
       - db
   db:
     image: postgres:9.6
     restart: always
     volumes:
-     # - .\postgres\init:/docker-entrypoint-initdb.d
-       - ./postgres/data/pgdata:/var/lib/postgresql/data/pgdata
+       - ./postgres/init:/docker-entrypoint-initdb.d
+       # - kikar_postgres_data:/var/lib/postgresql/data
+       -  ./postgres/data/postgresql.conf:/var/lib/postgresql/data/postgresql.conf 
     environment:
-      - PGDATA="/var/lib/postgresql/data/pgdata"
-      - POSTGRES_PASSWORD=password
+      # - PGDATA=/var/lib/postgresql/data/pgdata
+      - PGDATA=/tmp
+      #- POSTGRES_PASSWORD=password
   start-dependencies:
     image: "python:3.6"
     depends_on:
