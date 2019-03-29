@@ -1,0 +1,40 @@
+version: '3'
+services:
+  web:
+    depends_on:
+      - db
+    build: .
+    expose:
+      - "8000"
+    ports:
+      -  "8000:8000"
+    links:
+      - db
+  db:
+    image: postgres:9.6
+    restart: always
+    volumes:
+       - ./postgres/init:/docker-entrypoint-initdb.d
+       # - kikar_postgres_data:/var/lib/postgresql/data
+       -  ./postgres/data/postgresql.conf:/var/lib/postgresql/data/postgresql.conf 
+    environment:
+      # - PGDATA=/var/lib/postgresql/data/pgdata
+      - PGDATA=/tmp
+      #- POSTGRES_PASSWORD=password
+  start-dependencies:
+    image: "python:3.6"
+    depends_on:
+    - web
+    - db
+    links:
+    - db
+    - web
+    command: >
+      /bin/bash -c "
+      until $$(curl --output /dev/null --silent --head --fail http://web:8000); do
+        echo \"BUILDING...\"
+        sleep 5
+      done; echo \"BUILD COMPLETE - visit http://localhost:8000 in a browser\";"
+
+volumes:
+  kikar_postgres_data:
