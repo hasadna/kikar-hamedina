@@ -4,7 +4,7 @@ ipython
 django-extensions==1.5.9
 djangorestframework==2.3.10
 facebook-sdk==1.0.0
-psycopg2==2.7
+psycopg2==2.7.7
 python-mimeparse==0.1.4
 six==1.10.0
 wsgiref==0.1.2
@@ -27,7 +27,7 @@ django-polymorphic==0.7.2
 jsonfield==1.0.0
 autotag
 django-autotag
-django-taggit
+django-taggit==0.17
 unicode-slugify
 solid_i18n==1.1.1
 dj-database-url==0.4.1
@@ -46,3 +46,5 @@ django-tagging==0.3.6
 django-modeltranslation==0.10.2
 django-cors-headers==1.1.0
 factory_boy==2.9.2
+xlrd==1.2.0
+tqdm==4.31.1

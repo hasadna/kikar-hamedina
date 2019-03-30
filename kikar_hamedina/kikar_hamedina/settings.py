@@ -188,7 +188,7 @@ SESSION_COOKIE_NAME = "myplanetid"
 CURRENT_KNESSET_NUMBER = 20
 CURRENT_ELECTED_KNESSET_NUMBER = CURRENT_KNESSET_NUMBER + 1
 
-IS_ELECTIONS_MODE = False
+IS_ELECTIONS_MODE = True
 
 LOGGING = {
     'version': 1,
@@ -213,7 +213,7 @@ LOGGING = {
         'scraping': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '%s/scarping.log' % os.path.join(REPOSITORY_ROOT,
+            'filename': '%s/scraping.log' % os.path.join(REPOSITORY_ROOT,
                                                          'log'),
             'maxBytes': 1024 * 1024 * 10,  # 10MB each log file
             'backupCount': 10,

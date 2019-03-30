@@ -4,6 +4,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from solid_i18n.urls import solid_i18n_patterns as patterns
 
 from core.api import PersonaResource
+from core.models import PARTY_MODEL
 from core.sitemap import MkSitemap, PartySitemap, StaticViewSitemap
 from . import views
 from facebook_feeds.models import Facebook_Status, TAG_NAME_CHARSET
@@ -104,14 +105,14 @@ urlpatterns = patterns('',
                            name='title-exists'),
                        # Views for all objects of type
                        url(r'^members/$', views.AllMembers.as_view(
-                           queryset=Party.objects.filter(
+                           queryset=PARTY_MODEL.objects.filter(
                                knesset__number=settings.
-                               CURRENT_KNESSET_NUMBER)),
+                               CURRENT_ELECTED_KNESSET_NUMBER).order_by('?')),
                            name='all-members'),
                        url(r'^parties/$', views.AllParties.as_view(
-                           queryset=Party.objects.filter(
+                           queryset=PARTY_MODEL.objects.filter(
                                knesset__number=settings.
-                               CURRENT_KNESSET_NUMBER)),
+                               CURRENT_ELECTED_KNESSET_NUMBER)),
                            name='all-parties'),
                        url(r'^tags/$',
                            views.AllTags.as_view(queryset=Tag.objects.all()),
