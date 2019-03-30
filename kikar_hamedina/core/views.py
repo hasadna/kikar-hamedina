@@ -10,30 +10,61 @@ from django.conf import settings
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.db.models import Count, Q
-from django.http import HttpResponseRedirect, HttpResponse, HttpRequest, \
-    QueryDict
-from django.shortcuts import render, render_to_response, get_object_or_404, \
-    redirect
+from django.db.models import (
+    Count,
+    Q,
+)
+from django.http import (
+    HttpRequest,
+    HttpResponse,
+    HttpResponseRedirect,
+    QueryDict,
+)
+from django.shortcuts import (
+    get_object_or_404,
+    redirect,
+    render,
+    render_to_response,
+)
 from django.template import RequestContext
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_protect
-from django.views.generic import DetailView, ListView
+from django.views.generic import (
+    DetailView,
+    ListView,
+)
 from endless_pagination.views import AjaxListView
 from facebook import GraphAPIError
 
 from core import params
 from core.billboards import Billboards
 from core.insights import StatsEngine
-from core.models import MEMBER_MODEL, PARTY_MODEL, UserSearch
+from core.models import (
+    MEMBER_MODEL,
+    PARTY_MODEL,
+    UserSearch,
+)
 from core.qserializer import QSerializer
-from core.query_utils import get_parsed_request, parse_to_q_object, \
-    apply_request_params, get_order_by, filter_by_date
+from core.query_utils import (
+    apply_request_params,
+    filter_by_date,
+    get_order_by,
+    get_parsed_request,
+    parse_to_q_object,
+)
 from facebook_feeds.management.commands import updatestatus
-from facebook_feeds.models import Facebook_Feed, User_Token, Facebook_Status, \
-    TAG_NAME_REGEX
-from facebook_feeds.models import Tag as OldTag
-from kikartags.models import Tag as Tag, HasSynonymError, TaggedItem
+from facebook_feeds.models import (
+    Facebook_Feed,
+    Facebook_Status,
+    TAG_NAME_REGEX,
+    Tag as OldTag,
+    User_Token,
+)
+from kikartags.models import (
+    HasSynonymError,
+    Tag as Tag,
+    TaggedItem,
+)
 
 logger = logging.getLogger(__file__)
 
