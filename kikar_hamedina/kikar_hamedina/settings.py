@@ -127,7 +127,7 @@ WSGI_APPLICATION = 'kikar_hamedina.wsgi.application'
 
 # schema://user:password@localhost:5432/db_name
 config = dj_database_url.config(
-    default='postgres://kikar:kikar@db:5432/kikar')
+    default='postgres://kikar:kikar@localhost:5432/kikar')
 DATABASES = {'default': config}
 
 # Default language, that will be used for requests without language prefix
@@ -188,7 +188,7 @@ SESSION_COOKIE_NAME = "myplanetid"
 CURRENT_KNESSET_NUMBER = 20
 CURRENT_ELECTED_KNESSET_NUMBER = CURRENT_KNESSET_NUMBER + 1
 
-IS_ELECTIONS_MODE = False
+IS_ELECTIONS_MODE = True
 
 LOGGING = {
     'version': 1,
