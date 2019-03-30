@@ -59,7 +59,8 @@ $(document).ready(function () {
                                 source = $("#result-member-list-item-template").html()
                             }
                             else if (result['type'] == "tag") {
-                                source = $("#result-tag-list-item-template").html()
+                                // ignore these for now, they have not been updated for ages
+                                continue;
                             }
 
                             result.count = i; // For Handlebars - id value on result output
