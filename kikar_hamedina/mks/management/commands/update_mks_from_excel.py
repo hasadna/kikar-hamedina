@@ -1,6 +1,6 @@
 import sys
 from optparse import make_option
-
+from django.conf import settings
 from tqdm import tqdm
 
 import pandas as pd
@@ -45,7 +45,7 @@ class Command(BaseCommand):
             return
 
         # must have candidate list from name in excel
-        cl = CandidateList.objects.get(name=rasham_party)
+        cl = CandidateList.objects.get(name=rasham_party, knesset__number=settings.CURRENT_ELECTED_KNESSET_NUMBER)
 
         # create persona
         persona = Facebook_Persona()
