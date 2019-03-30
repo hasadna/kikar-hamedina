@@ -107,7 +107,7 @@ urlpatterns = patterns('',
                        url(r'^members/$', views.AllMembers.as_view(
                            queryset=PARTY_MODEL.objects.filter(
                                knesset__number=settings.
-                               CURRENT_ELECTED_KNESSET_NUMBER)),
+                               CURRENT_ELECTED_KNESSET_NUMBER).order_by('?')),
                            name='all-members'),
                        url(r'^parties/$', views.AllParties.as_view(
                            queryset=PARTY_MODEL.objects.filter(

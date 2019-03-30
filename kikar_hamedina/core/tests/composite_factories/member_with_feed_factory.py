@@ -1,8 +1,17 @@
 from django.conf import settings
 from django.utils import timezone
-from facebook_feeds.factories import FacebookPersonaFactory, \
-    FeedPopularityFactory, FacebookFeedFactory, FacebookStatusFactory
-from mks.factories import KnessetFactory, PartyFactory, MemberFactory
+
+from facebook_feeds.factories import (
+    FacebookFeedFactory,
+    FacebookPersonaFactory,
+    FacebookStatusFactory,
+    FeedPopularityFactory,
+)
+from mks.factories import (
+    KnessetFactory,
+    MemberFactory,
+    PartyFactory,
+)
 
 DEFAULT_NUM_OF_STATUSES = 10
 DEFAULT_NUM_OF_POPULARITY_SAMPLES = 10
@@ -10,8 +19,9 @@ DEFAULT_NUM_OF_POPULARITY_SAMPLES = 10
 
 class CurrentMemberWithFeedFactory(object):
     def __init__(self):
-        self.knesset = KnessetFactory.create(
-            number=settings.CURRENT_KNESSET_NUMBER)
+        knesset_number = (
+            settings.CURRENT_KNESSET_NUMBER if settings.IS_ELECTIONS_MODE else settings.CURRENT_KNESSET_NUMBER)
+        self.knesset = KnessetFactory.create(number=knesset_number)
         self.party = PartyFactory(knesset=self.knesset)
         self.member = MemberFactory(current_party=self.party)
         self.persona = FacebookPersonaFactory(object_id=self.member.id)

@@ -1,11 +1,18 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
-from facebook_feeds.models import Facebook_Feed, Facebook_Persona, \
-    Facebook_Status, Feed_Popularity
-
-from mks.models import Knesset, Member, Party
 from core.tests.composite_factories import CurrentMemberWithFeedFactory
+from facebook_feeds.models import (
+    Facebook_Feed,
+    Facebook_Persona,
+    Facebook_Status,
+    Feed_Popularity,
+)
+from mks.models import (
+    Knesset,
+    Member,
+    Party,
+)
 
 
 def format_status_id(facebook_feed, status_id):
@@ -14,6 +21,9 @@ def format_status_id(facebook_feed, status_id):
 
 class CoreViewsTests(TestCase):
     def setUp(self):
+        from django.conf import settings
+        self.election_mode = settings.IS_ELECTIONS_MODE
+        settings.IS_ELECTIONS_MODE = False
         member_composite = CurrentMemberWithFeedFactory()
         self.member = member_composite.member
         member_composite.create_facebook_statuses()
@@ -27,6 +37,9 @@ class CoreViewsTests(TestCase):
         Facebook_Feed.objects.all().delete()
         Facebook_Status.objects.all().delete()
         Facebook_Persona.objects.all().delete()
+
+        from django.conf import settings
+        settings.IS_ELECTIONS_MODE = self.election_mode
 
     def test_about_us(self):
         url = reverse("about")
