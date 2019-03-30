@@ -213,7 +213,7 @@ LOGGING = {
         'scraping': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '%s/scarping.log' % os.path.join(REPOSITORY_ROOT,
+            'filename': '%s/scraping.log' % os.path.join(REPOSITORY_ROOT,
                                                          'log'),
             'maxBytes': 1024 * 1024 * 10,  # 10MB each log file
             'backupCount': 10,
