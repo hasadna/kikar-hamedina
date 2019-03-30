@@ -10,30 +10,61 @@ from django.conf import settings
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.db.models import Count, Q
-from django.http import HttpResponseRedirect, HttpResponse, HttpRequest, \
-    QueryDict
-from django.shortcuts import render, render_to_response, get_object_or_404, \
-    redirect
+from django.db.models import (
+    Count,
+    Q,
+)
+from django.http import (
+    HttpRequest,
+    HttpResponse,
+    HttpResponseRedirect,
+    QueryDict,
+)
+from django.shortcuts import (
+    get_object_or_404,
+    redirect,
+    render,
+    render_to_response,
+)
 from django.template import RequestContext
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_protect
-from django.views.generic import DetailView, ListView
+from django.views.generic import (
+    DetailView,
+    ListView,
+)
 from endless_pagination.views import AjaxListView
 from facebook import GraphAPIError
 
 from core import params
 from core.billboards import Billboards
 from core.insights import StatsEngine
-from core.models import MEMBER_MODEL, PARTY_MODEL, UserSearch
+from core.models import (
+    MEMBER_MODEL,
+    PARTY_MODEL,
+    UserSearch,
+)
 from core.qserializer import QSerializer
-from core.query_utils import get_parsed_request, parse_to_q_object, \
-    apply_request_params, get_order_by, filter_by_date
+from core.query_utils import (
+    apply_request_params,
+    filter_by_date,
+    get_order_by,
+    get_parsed_request,
+    parse_to_q_object,
+)
 from facebook_feeds.management.commands import updatestatus
-from facebook_feeds.models import Facebook_Feed, User_Token, Facebook_Status, \
-    TAG_NAME_REGEX
-from facebook_feeds.models import Tag as OldTag
-from kikartags.models import Tag as Tag, HasSynonymError, TaggedItem
+from facebook_feeds.models import (
+    Facebook_Feed,
+    Facebook_Status,
+    TAG_NAME_REGEX,
+    Tag as OldTag,
+    User_Token,
+)
+from kikartags.models import (
+    HasSynonymError,
+    Tag as Tag,
+    TaggedItem,
+)
 
 logger = logging.getLogger(__file__)
 
@@ -49,7 +80,7 @@ class AboutUsView(ListView):
     def get_context_data(self, **kwargs):
         context = super(AboutUsView, self).get_context_data(**kwargs)
         new_statuses_last_day = Facebook_Status.objects.filter(published__gte=(
-            datetime.date.today() - datetime.timedelta(days=1))).count()
+                datetime.date.today() - datetime.timedelta(days=1))).count()
         context['IS_ELECTION_MODE'] = params.IS_ELECTIONS_MODE
         context['statuses_last_day'] = new_statuses_last_day
         members = MEMBER_MODEL.objects.all()
@@ -92,8 +123,8 @@ class HotTopicsView(ListView):
     def get_queryset(self):
 
         relevant_statuses = Facebook_Status.objects.filter(published__gte=(
-            datetime.date.today() - datetime.timedelta(
-                days=params.NUMBER_OF_LAST_DAYS_FOR_HOT_TAGS)))
+                datetime.date.today() - datetime.timedelta(
+                    days=params.NUMBER_OF_LAST_DAYS_FOR_HOT_TAGS)))
         status_ids = [status.id for status in relevant_statuses]
         queryset = Tag.objects.filter(
             is_for_main_display=True,
@@ -185,9 +216,9 @@ class AllStatusesView(StatusListView):
         context = super(AllStatusesView, self).get_context_data(**kwargs)
         feeds = Facebook_Feed.objects.filter(
             facebook_status__published__gte=(
-                datetime.date.today() - datetime.timedelta(
-                    hours=params.HOURS_SINCE_PUBLICATION_FOR_SIDE_BAR
-                ))).distinct()
+                    datetime.date.today() - datetime.timedelta(
+                        hours=params.HOURS_SINCE_PUBLICATION_FOR_SIDE_BAR
+                    ))).distinct()
         context['side_bar_list'] = MEMBER_MODEL.objects.filter(
             id__in=[feed.persona.owner_id for feed in
                     feeds]).distinct().order_by('name')
@@ -694,7 +725,8 @@ def search_bar_parties(search_text):
     combined_party_name_query = query_direct_name | query_alternative_names
 
     if params.IS_ELECTIONS_MODE:
-        party_query = combined_party_name_query
+        party_query = combined_party_name_query & Q(knesset__number=settings.CURRENT_ELECTED_KNESSET_NUMBER)
+
     else:
         party_query = combined_party_name_query & Q(
             knesset__number=params.CURRENT_KNESSET_NUMBER)
@@ -712,7 +744,9 @@ def search_bar_members(search_text):
             person__personaltname__name__icontains=search_text)
         combined_member_name_query = Q(
             person__name__icontains=search_text) | query_alternative_names
-        member_query = combined_member_name_query
+        member_query = combined_member_name_query & Q(
+            candidates_list__knesset__number=settings.CURRENT_ELECTED_KNESSET_NUMBER)
+
         member_order_by = 'person__name'
     else:
         query_alternative_names = Q(memberaltname__name__icontains=search_text)
@@ -721,7 +755,7 @@ def search_bar_members(search_text):
         member_order_by = 'name'
 
     members = MEMBER_MODEL.objects.filter(member_query).distinct()
-    return members.select_related('current_party').order_by(member_order_by)[
+    return members.order_by(member_order_by)[
            :params.NUMBER_OF_SUGGESTIONS_IN_SEARCH_BAR]
 
 

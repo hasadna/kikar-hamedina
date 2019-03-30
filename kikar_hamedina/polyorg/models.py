@@ -98,7 +98,7 @@ class CandidateList(models.Model):
         return ('candidate-list-detail', [self.id])
 
     def __unicode__(self):
-        return self.name
+        return u'{} ({})'.format(self.name, self.knesset)
 
 
 class Party(models.Model):
@@ -126,6 +126,16 @@ class Candidate(models.Model):
 
     objects = BetterManager()
     current_knesset = CurrentKnessetCandidatesManager()
+
+    @property
+    def name(self):
+        return self.person.name
+
+    @name.setter
+    def name(self, value):
+        self.person.name = value
+        self.person.save()
+
 
     def get_mk(self):
         """Standard way to get mk. Currently this relies on Facebook_Persona,
