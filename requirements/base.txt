@@ -46,3 +46,5 @@ django-tagging==0.3.6
 django-modeltranslation==0.10.2
 django-cors-headers==1.1.0
 factory_boy==2.9.2
+xlrd==1.2.0
+tqdm==4.31.1
