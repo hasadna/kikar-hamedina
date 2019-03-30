@@ -22,8 +22,8 @@ def format_status_id(facebook_feed, status_id):
 class CoreViewsTests(TestCase):
     def setUp(self):
         from django.conf import settings
-        self.election_mode = settings.IS_ELECTION_MODE
-        settings.IS_ELECTION_MODE = False
+        self.election_mode = settings.IS_ELECTIONS_MODE
+        settings.IS_ELECTIONS_MODE = False
         member_composite = CurrentMemberWithFeedFactory()
         self.member = member_composite.member
         member_composite.create_facebook_statuses()
@@ -39,7 +39,7 @@ class CoreViewsTests(TestCase):
         Facebook_Persona.objects.all().delete()
 
         from django.conf import settings
-        settings.IS_ELECTION_MODE = self.election_mode
+        settings.IS_ELECTIONS_MODE = self.election_mode
 
     def test_about_us(self):
         url = reverse("about")
